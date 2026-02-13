@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 Admin - Đào Vàng Tình Yêu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #ff6b8a;
+            --rose: #c44569;
+            --light-pink: #f8a5c2;
+            --dark: #1a0a2e;
+            --mid: #2d1b4e;
+            --gold: #ffd700;
+            --glass: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, var(--dark), var(--mid), var(--dark));
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--pink), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .sub {
+            text-align: center;
+            color: var(--light-pink);
+            font-size: 13px;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .card h3 {
+            color: var(--gold);
+            font-size: 16px;
+            margin-bottom: 14px;
+        }
+
+        label {
+            display: block;
+            color: var(--light-pink);
+            font-size: 13px;
+            margin-bottom: 4px;
+            margin-top: 10px;
+        }
+
+        label:first-of-type {
+            margin-top: 0;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--pink);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--pink), var(--rose));
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(255, 107, 138, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-sm {
+            padding: 8px 18px;
+            font-size: 13px;
+            border-radius: 10px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: var(--light-pink);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--pink);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* Password screen */
+        #pw-screen,
+        #admin-panel {
+            display: none;
+        }
+
+        #pw-screen.active,
+        #admin-panel.active {
+            display: block;
+        }
+
+        .pw-card {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .pw-card input {
+            max-width: 250px;
+            margin: 0 auto 16px;
+            text-align: center;
+            display: block;
+        }
+
+        .pw-error {
+            color: #ff4444;
+            font-size: 13px;
+            margin-bottom: 10px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Password -->
+        <div id="pw-screen" class="active">
+            <div class="card pw-card">
+                <h1>🔐 Admin Panel</h1>
+                <p class="sub">Nhập mật khẩu để truy cập</p>
+                <input type="password" id="pw-input" placeholder="Mật khẩu...">
+                <p class="pw-error" id="pw-error">Sai mật khẩu!</p>
+                <button class="btn btn-primary" id="pw-btn">Vào Admin</button>
+                <p class="sub" style="margin-top:12px;font-size:11px;">Mật khẩu mặc định: love2026</p>
+            </div>
+        </div>
+
+        <!-- Admin Panel -->
+        <div id="admin-panel">
+            <h1>🎁 Setup Quà Valentine</h1>
+            <p class="sub">Tùy chỉnh phần quà cho mỗi Level</p>
+
+            <div id="gifts-container"></div>
+
+            <div class="card">
+                <h3>🔑 Đổi Mật Khẩu</h3>
+                <label>Mật khẩu mới</label>
+                <input type="text" id="new-pw" placeholder="Nhập mật khẩu mới...">
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-primary" id="save-btn">💾 Lưu Tất Cả</button>
+                <button class="btn btn-primary btn-sm" id="reset-btn" style="background:#555;">🗑️ Reset</button>
+            </div>
+
+            <a href="index.html" class="back-link">← Quay về Game</a>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">Đã lưu!</div>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

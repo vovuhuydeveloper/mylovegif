@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+  <title>💕 Đào Vàng Tình Yêu - Valentine 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!-- Animated BG -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- ===== WELCOME ===== -->
+  <div id="screen-welcome" class="screen active">
+    <div class="glass-card welcome-card animate-in">
+      <div class="logo-wrap">
+        <span class="logo-icon">⛏️</span>
+        <span class="logo-heart">�</span>
+      </div>
+      <h1 class="game-title">Đào Vàng<br>Tình Yêu</h1>
+      <p class="game-subtitle">Valentine Edition 2026</p>
+      <div class="name-inputs">
+        <div class="fancy-input">
+          <span class="input-icon">🧑</span>
+          <input type="text" id="inp-name1" placeholder="Tên bạn..." maxlength="16">
+        </div>
+        <div class="heart-divider">💕</div>
+        <div class="fancy-input">
+          <span class="input-icon">👩</span>
+          <input type="text" id="inp-name2" placeholder="Tên người yêu..." maxlength="16">
+        </div>
+      </div>
+      <div class="photo-uploads">
+        <div class="photo-upload-box">
+          <label for="photo-me" class="photo-label">
+            <div class="photo-preview" id="preview-me">🧑</div>
+            <span>Ảnh của bạn ✨</span>
+          </label>
+          <input type="file" id="photo-me" accept="image/*" hidden>
+        </div>
+        <div class="photo-upload-box">
+          <label for="photo-lover" class="photo-label">
+            <div class="photo-preview" id="preview-lover">👩</div>
+            <span>Ảnh người yêu 💕</span>
+          </label>
+          <input type="file" id="photo-lover" accept="image/*" hidden>
+        </div>
+      </div>
+      <button id="btn-start" class="btn-glow">
+        <span>Bắt Đầu</span>
+        <i>❤️</i>
+      </button>
+      <a href="admin.html" class="admin-link">⚙️ Quản lý quà</a>
+    </div>
+  </div>
+
+  <!-- ===== LEVEL INTRO ===== -->
+  <div id="screen-level" class="screen">
+    <div class="glass-card level-card animate-in">
+      <div class="level-badge" id="level-badge">LEVEL 1</div>
+      <h2 class="level-title" id="level-title">Tình yêu nảy nở 🌱</h2>
+      <div class="level-stats">
+        <div class="stat-box">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-val" id="stat-target">500</div>
+          <div class="stat-label">Mục tiêu</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">⏱️</div>
+          <div class="stat-val" id="stat-time">60s</div>
+          <div class="stat-label">Thời gian</div>
+        </div>
+      </div>
+      <div class="item-preview" id="item-preview"></div>
+      <p class="tip-text">💡 Chạm màn hình hoặc nhấn <kbd>Space</kbd> để bắn!</p>
+      <button id="btn-play" class="btn-glow">
+        <span>Chiến Thôi!</span>
+        <i>🎮</i>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== GAME ===== -->
+  <div id="screen-game" class="screen">
+    <div class="game-wrap">
+      <div id="hud">
+        <div class="hud-left">
+          <div class="hud-timer-ring">
+            <svg viewBox="0 0 40 40">
+              <circle cx="20" cy="20" r="18" class="ring-bg" />
+              <circle cx="20" cy="20" r="18" class="ring-fg" id="timer-ring" />
+            </svg>
+            <span id="hud-time">60</span>
+          </div>
+        </div>
+        <div class="hud-center">
+          <div class="score-wrap">
+            <span class="score-label">SCORE</span>
+            <span class="score-num" id="hud-score">0</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="hud-progress"></div>
+          </div>
+          <span class="target-label" id="hud-target-label">🎯 500</span>
+        </div>
+        <div class="hud-right">
+          <div class="combo-badge hidden" id="combo-badge">
+            <span id="combo-text">x2</span>
+            <span class="combo-label">COMBO</span>
+          </div>
+        </div>
+      </div>
+      <canvas id="game-canvas"></canvas>
+    </div>
+  </div>
+
+  <!-- ===== LEVEL RESULT ===== -->
+  <div id="screen-result" class="screen">
+    <div class="glass-card result-card animate-in">
+      <div class="result-icon" id="result-icon">🎉</div>
+      <h2 class="result-title" id="result-title">Tuyệt Vời!</h2>
+      <div class="result-score-wrap">
+        <span class="result-score-num" id="result-score">850</span>
+        <span class="result-score-label">điểm</span>
+      </div>
+      <div id="stars-wrap" class="stars-wrap"></div>
+
+      <!-- Gift area -->
+      <div id="gift-area" class="gift-area hidden">
+        <p class="gift-unlocked-text">🔓 Phần quà đã mở khóa!</p>
+        <div id="gift-box-wrap" class="gift-box-wrap">
+          <div class="gift-box" id="gift-box">
+            <div class="gift-ribbon">🎀</div>
+            <div class="gift-body">🎁</div>
+            <p class="tap-hint">Chạm để mở!</p>
+          </div>
+        </div>
+        <div id="gift-reveal" class="gift-reveal hidden">
+          <h3 id="gift-name" class="gift-name"></h3>
+          <p id="gift-desc" class="gift-desc"></p>
+          <img id="gift-img" class="gift-img hidden" alt="">
+          <blockquote id="gift-msg" class="gift-msg"></blockquote>
+        </div>
+      </div>
+      <div id="no-gift-area" class="hidden">
+        <p class="no-gift-hint">💌 Chưa có quà nào! Hãy setup ở trang Admin nhé~</p>
+      </div>
+
+      <button id="btn-next" class="btn-glow">
+        <span>Tiếp Tục</span>
+        <i>➡️</i>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== GAME OVER ===== -->
+  <div id="screen-end" class="screen">
+    <div class="glass-card end-card animate-in">
+      <div class="end-emoji">💖✨💖</div>
+      <h2 class="end-title">Hoàn Thành!</h2>
+      <p class="end-total" id="end-total">Tổng: 2850 ⭐</p>
+      <p class="end-msg" id="end-msg"></p>
+      <button id="btn-restart" class="btn-glow">
+        <span>Chơi Lại</span>
+        <i>🔄</i>
+      </button>
+    </div>
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+
+</html>
