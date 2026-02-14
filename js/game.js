@@ -4,31 +4,47 @@
 
 // ---- CONFIG ----
 const ITEMS = {
-  LETTER: { emoji: '💌', name: 'Thư tình', pts: 50, w: 1, sz: 40, hr: 22, img: 'assets/letter.svg' },
-  CHOCOLATE: { emoji: '🍫', name: 'Chocolate', pts: 100, w: 1, sz: 40, hr: 22, img: 'assets/chocolate.svg' },
-  ROSE: { emoji: '🌹', name: 'Hoa hồng', pts: 150, w: 2, sz: 44, hr: 24, img: 'assets/rose.svg' },
-  TEDDY: { emoji: '🧸', name: 'Gấu bông', pts: 250, w: 3, sz: 52, hr: 28, img: 'assets/teddy.svg' },
-  HEART: { emoji: '❤️', name: 'Trái tim', pts: 400, w: 3, sz: 50, hr: 28, img: 'assets/heart.svg' },
-  DIAMOND: { emoji: '💎', name: 'Kim cương', pts: 500, w: 1, sz: 38, hr: 20, img: 'assets/diamond.svg' },
-  RING: { emoji: '💍', name: 'Nhẫn cầu hôn', pts: 1000, w: 1, sz: 38, hr: 20, img: 'assets/ring.svg' },
-  ROCK: { emoji: '🪨', name: 'Đá', pts: 10, w: 5, sz: 52, hr: 30, img: 'assets/rock.svg' },
-  CLOUD: { emoji: '☁️', name: 'Mây', pts: 0, w: 0, sz: 48, hr: 28, img: 'assets/cloud.svg' },
-  TNT: { emoji: '🧨', name: 'TNT', pts: 0, w: 1, sz: 40, hr: 22, img: 'assets/tnt.svg' },
-  MYPHOTO: { emoji: '📸', name: 'Ảnh của bạn', pts: 2000, w: 4, sz: 44, hr: 18 },
+  LETTER: { emoji: '💌', name: 'Thư tình', pts: 30, w: 1, sz: 40, hr: 22, img: 'assets/letter.svg', msg: '💌 Thư tình' },
+  CHOCOLATE: { emoji: '🍫', name: 'Chocolate', pts: 50, w: 1, sz: 40, hr: 22, img: 'assets/chocolate.svg', msg: '🍫 Ngọt ngào' },
+  ROSE: { emoji: '🌹', name: 'Hoa hồng', pts: 80, w: 2, sz: 44, hr: 24, img: 'assets/rose.svg', msg: '🌹 Đẹp như em' },
+  TEDDY: { emoji: '🧸', name: 'Gấu bông', pts: 120, w: 3, sz: 52, hr: 28, img: 'assets/teddy.svg', msg: '🧸 Ôm em thật chặt' },
+  HEART: { emoji: '❤️', name: 'Trái tim', pts: 150, w: 3, sz: 50, hr: 28, img: 'assets/heart.svg', msg: '❤️ Yêu em mãi' },
+  DIAMOND: { emoji: '💎', name: 'Kim cương', pts: 200, w: 1, sz: 38, hr: 20, img: 'assets/diamond.svg', msg: '💎 Quý giá như em' },
+  RING: { emoji: '💍', name: 'Nhẫn cầu hôn', pts: 300, w: 1, sz: 38, hr: 20, img: 'assets/ring.svg', msg: '💍 Mãi bên em' },
+  ROCK: { emoji: '🪨', name: 'Đá', pts: 5, w: 5, sz: 52, hr: 30, img: 'assets/rock.svg', msg: '🪨 Đá vô dụng' },
+  CLOUD: { emoji: '☁️', name: 'Mây', pts: 0, w: 0, sz: 48, hr: 28, img: 'assets/cloud.svg', msg: '☁️ Bay mất rồi' },
+  TNT: { emoji: '🧨', name: 'TNT', pts: 0, w: 1, sz: 40, hr: 22, img: 'assets/tnt.svg', msg: '💥 Nổ!' },
+  MYPHOTO: { emoji: '📸', name: 'Ảnh của bạn', pts: 1000, w: 4, sz: 44, hr: 18, msg: '📸 Người anh yêu' },
 };
+
+// ---- LỜI CHÚC KHI NHẶT THƯ TÌNH ----
+const LOVE_MESSAGES = [
+  '💕 Em là khoản đầu tư sinh lời nhất đời anh!',
+  '📈 Tình yêu mình như cổ phiếu blue-chip — chỉ có tăng giá!',
+  '🌟 Em giỏi BA lắm, nhưng requirement quan trọng nhất là... ở bên anh!',
+  '💎 Em phân tích chứng khoán chuẩn xác, nhưng trái tim anh thì không cần phân tích — nó thuộc về em rồi!',
+  '🚀 Skill của em như đường EMA — luôn vượt kỳ vọng!',
+  '📊 Em là Business Analyst giỏi nhất, và anh là stakeholder trung thành nhất!',
+  '💖 Em cải thiện mỗi ngày, và tình yêu anh dành cho em cũng vậy!',
+  '🌹 Danh mục đầu tư có thể thay đổi, nhưng anh đầu tư vào em là mãi mãi!',
+  '⭐ Em là user story đẹp nhất mà anh từng viết: "As a người yêu, I want ở bên em forever"!',
+  '📈 Chứng khoán có lên có xuống, nhưng tình anh dành cho em chỉ có ALL TIME HIGH!',
+  '💕 Em sprint nào cũng deliver xuất sắc — trong công việc lẫn trong trái tim anh!',
+  '🔥 Em là acceptance criteria duy nhất cho hạnh phúc của anh!',
+];
 
 const LEVELS = [
   {
-    name: 'Tình yêu nảy nở 🌱', target: 500, time: 60, swing: 1.8,
-    spawn: [['LETTER', 4], ['CHOCOLATE', 3], ['ROSE', 2], ['TEDDY', 1], ['HEART', 1], ['ROCK', 2], ['CLOUD', 1], ['MYPHOTO', 1]]
+    name: 'Tình yêu nảy nở 🌱', target: 300, time: 60, swing: 1.8,
+    spawn: [['LETTER', 4], ['CHOCOLATE', 3], ['ROSE', 2], ['TEDDY', 1], ['ROCK', 2], ['CLOUD', 1], ['MYPHOTO', 1]]
   },
   {
-    name: 'Yêu thương lớn dần 🌸', target: 900, time: 55, swing: 2.2,
-    spawn: [['LETTER', 2], ['CHOCOLATE', 3], ['ROSE', 3], ['TEDDY', 2], ['HEART', 1], ['DIAMOND', 1], ['ROCK', 3], ['CLOUD', 2], ['TNT', 1], ['MYPHOTO', 1]]
+    name: 'Yêu thương lớn dần 🌸', target: 500, time: 55, swing: 2.2,
+    spawn: [['LETTER', 3], ['CHOCOLATE', 3], ['ROSE', 2], ['TEDDY', 2], ['HEART', 1], ['DIAMOND', 1], ['ROCK', 3], ['CLOUD', 2], ['TNT', 1], ['MYPHOTO', 1]]
   },
   {
-    name: 'Tình yêu bất diệt 💖', target: 1200, time: 50, swing: 2.6,
-    spawn: [['CHOCOLATE', 2], ['ROSE', 2], ['TEDDY', 2], ['HEART', 2], ['DIAMOND', 1], ['RING', 1], ['ROCK', 4], ['CLOUD', 2], ['TNT', 1], ['MYPHOTO', 1]]
+    name: 'Tình yêu bất diệt 💖', target: 700, time: 50, swing: 2.6,
+    spawn: [['LETTER', 2], ['CHOCOLATE', 2], ['ROSE', 2], ['TEDDY', 1], ['HEART', 2], ['DIAMOND', 1], ['RING', 1], ['ROCK', 4], ['CLOUD', 2], ['TNT', 1], ['MYPHOTO', 1]]
   },
 ];
 
@@ -190,6 +206,7 @@ class Game {
     this.pivotX = 0; this.pivotY = 0; this.maxLen = 0;
     this.groundY = 0; this.shakeT = 0; this.config = null;
     this.gameTime = 0; // for item bobbing
+    this.loveMsg = null; this.loveMsgT = 0; this.loveMsgDur = 3.5; // love message overlay
 
     // Photos
     this.photoMe = null;     // Image object for user's photo
@@ -503,7 +520,7 @@ class Game {
 
     // Special: MYPHOTO = instant level pass!
     if (item.type === 'MYPHOTO') {
-      const bonus = 2000 * this.multi;
+      const bonus = 1000 * this.multi;
       this.score += bonus;
       // Big celebration effect
       for (let i = 0; i < 20; i++) {
@@ -513,12 +530,12 @@ class Game {
         }));
       }
       // Emoji burst
-      ['💖', '✨', '🎉', '💕', '⭐'].forEach((em, i) => {
+      ['💖', '✨', '🎉', '💕', '⭐'].forEach((em) => {
         this.particles.push(new Particle(this.pivotX + rand(-30, 30), this.pivotY - 10, {
           emoji: em, emojiSize: 24, vy: rand(-140, -60), vx: rand(-80, 80), gravity: 100, life: 1.5
         }));
       });
-      this.popups.push(new Popup(this.pivotX, this.pivotY - 20, '💖 +' + bonus + '!', '#ff4d8d'));
+      this.popups.push(new Popup(this.pivotX, this.pivotY - 20, '💖 +' + bonus + ' gold!', '#ff4d8d'));
       this.popups.push(new Popup(this.pivotX, this.pivotY - 50, '🎉 QUA MÀN!', '#ffc857'));
       this.sfx.fever(); this.sfx.gift(); this.shakeT = 0.4;
       this.updateHUD();
@@ -536,30 +553,44 @@ class Game {
         if (it.type === 'ROCK' && !it.collected) {
           it.collected = true;
           for (let i = 0; i < 8; i++) this.particles.push(new Particle(it.x, it.y, { color: ['#ff4400', '#ff8800', '#ffcc00'][randInt(0, 2)], size: rand(3, 8) }));
-          bonus += 50;
+          bonus += 20;
         }
       });
       for (let i = 0; i < 12; i++) this.particles.push(new Particle(this.pivotX, this.pivotY + 20, { color: '#ff4400', size: rand(4, 9) }));
       this.popups.push(new Popup(this.pivotX, this.pivotY, '💥 BOOM!', '#ff4400'));
-      if (bonus > 0) { this.score += bonus; this.popups.push(new Popup(this.pivotX, this.pivotY + 25, '+' + bonus, '#ffc857')); }
+      if (bonus > 0) { this.score += bonus; this.popups.push(new Popup(this.pivotX, this.pivotY + 25, '+' + bonus + ' gold', '#ffc857')); }
       this.sfx.boom(); this.shakeT = 0.3;
       this.combo = 0; this.multi = 1;
     } else {
       const pts = item.pts * this.multi;
       this.score += pts;
       // particles
-      const colors = item.pts >= 400 ? ['#ffc857', '#ff4d8d', '#c67dff'] : ['#ffc857', '#ffaa00'];
+      const colors = item.pts >= 150 ? ['#ffc857', '#ff4d8d', '#c67dff'] : ['#ffc857', '#ffaa00'];
       for (let i = 0; i < 8; i++) this.particles.push(new Particle(this.pivotX, this.pivotY + 15, { color: colors[randInt(0, colors.length - 1)], size: rand(2, 6) }));
       // emoji particle
       this.particles.push(new Particle(this.pivotX, this.pivotY - 10, { emoji: item.emoji, emojiSize: 20, vy: -100, gravity: 100, life: 1 }));
-      this.popups.push(new Popup(this.pivotX, this.pivotY - 5, '+' + pts + (this.multi > 1 ? ' x' + this.multi : ''), this.multi >= 3 ? '#ff4400' : '#ffc857'));
-      this.sfx.grab();
+
+      // Show item message + gold
+      if (item.msg) {
+        this.popups.push(new Popup(this.pivotX, this.pivotY - 25, item.msg, '#fff'));
+      }
+      this.popups.push(new Popup(this.pivotX, this.pivotY + 5, '+' + pts + ' gold' + (this.multi > 1 ? ' x' + this.multi : ''), this.multi >= 3 ? '#ff4400' : '#ffc857'));
+
+      // LETTER: show special love message
+      if (item.type === 'LETTER') {
+        const msg = LOVE_MESSAGES[randInt(0, LOVE_MESSAGES.length - 1)];
+        this.showLoveMessage(msg);
+        this.sfx.gift();
+      } else {
+        this.sfx.grab();
+      }
+
       // Combo
       if (item.type !== 'ROCK') {
         this.combo++;
         if (this.combo >= 5 && !this.fever) {
           this.fever = true; this.feverT = 8; this.multi = 3;
-          this.popups.push(new Popup(this.pivotX, this.pivotY - 30, '🔥 FEVER x3!', '#ff4400'));
+          this.popups.push(new Popup(this.pivotX, this.pivotY - 50, '🔥 FEVER x3!', '#ff4400'));
           this.sfx.fever(); this.shakeT = 0.2;
         } else if (this.combo >= 3 && !this.fever) { this.multi = 2; this.sfx.combo(); }
       } else { this.combo = 0; this.multi = this.fever ? 3 : 1; }
@@ -567,6 +598,12 @@ class Game {
       if (item.w >= 3) this.shakeT = 0.15;
     }
     this.updateHUD();
+  }
+
+  // ---- LOVE MESSAGE OVERLAY ----
+  showLoveMessage(msg) {
+    this.loveMsg = msg;
+    this.loveMsgT = this.loveMsgDur;
   }
 
   // ---- HUD ----
@@ -607,6 +644,7 @@ class Game {
     if (this.fever) { this.feverT -= dt; if (this.feverT <= 0) { this.fever = false; this.multi = this.combo >= 3 ? 2 : 1; } }
     // Shake
     if (this.shakeT > 0) this.shakeT -= dt;
+    if (this.loveMsgT > 0) this.loveMsgT -= dt;
     // Hook
     this.updateHook(dt);
     this.updateHUD();
@@ -850,6 +888,72 @@ class Game {
     // Particles & popups
     this.particles.forEach(p => p.draw(ctx));
     this.popups.forEach(p => p.draw(ctx));
+
+    // ---- Love Message Overlay ----
+    if (this.loveMsg && this.loveMsgT > 0) {
+      const dur = this.loveMsgDur;
+      const fadeIn = 0.4, fadeOut = 0.5;
+      let alpha = 1;
+      if (this.loveMsgT > dur - fadeIn) alpha = (dur - this.loveMsgT) / fadeIn;
+      else if (this.loveMsgT < fadeOut) alpha = this.loveMsgT / fadeOut;
+      alpha = Math.max(0, Math.min(1, alpha));
+
+      // Semi-transparent backdrop
+      ctx.globalAlpha = alpha * 0.55;
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, W, H);
+
+      // Message card
+      const cardW = W * 0.85, cardH = 110;
+      const cx = W / 2, cy = H * 0.4;
+      ctx.globalAlpha = alpha;
+
+      // Card background with rounded corners
+      const rx = cx - cardW / 2, ry = cy - cardH / 2;
+      ctx.fillStyle = 'rgba(60, 10, 30, 0.92)';
+      ctx.beginPath(); ctx.roundRect(rx, ry, cardW, cardH, 16); ctx.fill();
+      // Card border glow
+      ctx.strokeStyle = 'rgba(255, 77, 141, 0.6)';
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.roundRect(rx, ry, cardW, cardH, 16); ctx.stroke();
+
+      // Inner glow
+      const grd = ctx.createRadialGradient(cx, cy, 10, cx, cy, cardW / 2);
+      grd.addColorStop(0, 'rgba(255, 77, 141, 0.15)');
+      grd.addColorStop(1, 'rgba(255, 77, 141, 0)');
+      ctx.fillStyle = grd;
+      ctx.beginPath(); ctx.roundRect(rx, ry, cardW, cardH, 16); ctx.fill();
+
+      // Heart decorations
+      ctx.font = '20px serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('💌', rx + 24, cy);
+      ctx.fillText('💕', rx + cardW - 24, cy);
+
+      // Message text - wrap lines
+      ctx.font = "bold 14px 'Baloo 2', cursive";
+      ctx.fillStyle = '#fff';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+
+      // Simple word-wrap
+      const maxW = cardW - 80;
+      const words = this.loveMsg.split(' ');
+      const lines = []; let line = '';
+      words.forEach(w => {
+        const test = line ? line + ' ' + w : w;
+        if (ctx.measureText(test).width > maxW && line) { lines.push(line); line = w; }
+        else line = test;
+      });
+      if (line) lines.push(line);
+
+      const lineH = 22;
+      const startY = cy - ((lines.length - 1) * lineH) / 2;
+      lines.forEach((ln, i) => {
+        ctx.fillText(ln, cx, startY + i * lineH);
+      });
+
+      ctx.globalAlpha = 1;
+    }
 
     ctx.restore();
   }
