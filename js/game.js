@@ -331,7 +331,7 @@ class Game {
     this.pivotX = 0; this.pivotY = 0; this.maxLen = 0;
     this.groundY = 0; this.shakeT = 0; this.config = null;
     this.gameTime = 0; // for item bobbing
-    this.loveMsg = null; this.loveMsgT = 0; this.loveMsgDur = 3.5; // love message overlay
+    this.loveMsg = null; this.loveMsgT = 0; this.loveMsgDur = 2.0; // love message snackbar
 
     // Photos
     this.photoMe = null;     // Image object for user's photo
@@ -543,20 +543,20 @@ class Game {
     const canvas = document.getElementById('heartcatch-canvas');
     const ctx = canvas.getContext('2d');
     const W = canvas.width, H = canvas.height;
-    let timer = 10;
+    let timer = 8;
     let caught = 0;
     const maxCatch = 5;
     const hearts = [];
     let running = true;
     let lastT = performance.now();
 
-    // Spawn hearts
+    // Spawn hearts (faster + smaller)
     const spawnHeart = () => {
       hearts.push({
         x: 30 + Math.random() * (W - 60),
         y: -40,
-        vy: 120 + Math.random() * 80,
-        sz: 30 + Math.random() * 15,
+        vy: 200 + Math.random() * 150,
+        sz: 24 + Math.random() * 10,
         emoji: ['❤️', '💕', '💖', '💗', '💓'][Math.floor(Math.random() * 5)],
         alive: true
       });
@@ -602,7 +602,7 @@ class Game {
       spawnT -= dt;
       if (spawnT <= 0 && caught < maxCatch) {
         spawnHeart();
-        spawnT = 0.6 + Math.random() * 0.5;
+        spawnT = 0.3 + Math.random() * 0.3; // faster spawn
       }
 
       // Update hearts
@@ -1320,68 +1320,37 @@ class Game {
     this.particles.forEach(p => p.draw(ctx));
     this.popups.forEach(p => p.draw(ctx));
 
-    // ---- Love Message Overlay ----
+    // ---- Love Message Snackbar (top) ----
     if (this.loveMsg && this.loveMsgT > 0) {
       const dur = this.loveMsgDur;
-      const fadeIn = 0.4, fadeOut = 0.5;
+      const fadeIn = 0.3, fadeOut = 0.3;
       let alpha = 1;
       if (this.loveMsgT > dur - fadeIn) alpha = (dur - this.loveMsgT) / fadeIn;
       else if (this.loveMsgT < fadeOut) alpha = this.loveMsgT / fadeOut;
       alpha = Math.max(0, Math.min(1, alpha));
 
-      // Semi-transparent backdrop
-      ctx.globalAlpha = alpha * 0.55;
-      ctx.fillStyle = '#000';
-      ctx.fillRect(0, 0, W, H);
+      // Slide in from top
+      const slideY = alpha < 1 && this.loveMsgT > dur - fadeIn ? (1 - alpha) * -60 : 0;
 
-      // Message card
-      const cardW = W * 0.85, cardH = 110;
-      const cx = W / 2, cy = H * 0.4;
-      ctx.globalAlpha = alpha;
-
-      // Card background with rounded corners
+      // Snackbar card at top
+      const cardW = Math.min(W * 0.9, 360), cardH = 44;
+      const cx = W / 2, cy = 50 + slideY;
+      ctx.globalAlpha = alpha * 0.9;
       const rx = cx - cardW / 2, ry = cy - cardH / 2;
-      ctx.fillStyle = 'rgba(60, 10, 30, 0.92)';
-      ctx.beginPath(); ctx.roundRect(rx, ry, cardW, cardH, 16); ctx.fill();
-      // Card border glow
-      ctx.strokeStyle = 'rgba(255, 77, 141, 0.6)';
-      ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.roundRect(rx, ry, cardW, cardH, 16); ctx.stroke();
+      ctx.fillStyle = 'rgba(60, 10, 50, 0.92)';
+      ctx.beginPath(); ctx.roundRect(rx, ry, cardW, cardH, 22); ctx.fill();
+      ctx.strokeStyle = 'rgba(255, 77, 141, 0.5)'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.roundRect(rx, ry, cardW, cardH, 22); ctx.stroke();
 
-      // Inner glow
-      const grd = ctx.createRadialGradient(cx, cy, 10, cx, cy, cardW / 2);
-      grd.addColorStop(0, 'rgba(255, 77, 141, 0.15)');
-      grd.addColorStop(1, 'rgba(255, 77, 141, 0)');
-      ctx.fillStyle = grd;
-      ctx.beginPath(); ctx.roundRect(rx, ry, cardW, cardH, 16); ctx.fill();
-
-      // Heart decorations
-      ctx.font = '20px serif';
-      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.fillText('💌', rx + 24, cy);
-      ctx.fillText('💕', rx + cardW - 24, cy);
-
-      // Message text - wrap lines
-      ctx.font = "bold 14px 'Baloo 2', cursive";
+      // Message text
+      ctx.globalAlpha = alpha;
+      ctx.font = "bold 13px 'Baloo 2', cursive";
       ctx.fillStyle = '#fff';
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-
-      // Simple word-wrap
-      const maxW = cardW - 80;
-      const words = this.loveMsg.split(' ');
-      const lines = []; let line = '';
-      words.forEach(w => {
-        const test = line ? line + ' ' + w : w;
-        if (ctx.measureText(test).width > maxW && line) { lines.push(line); line = w; }
-        else line = test;
-      });
-      if (line) lines.push(line);
-
-      const lineH = 22;
-      const startY = cy - ((lines.length - 1) * lineH) / 2;
-      lines.forEach((ln, i) => {
-        ctx.fillText(ln, cx, startY + i * lineH);
-      });
+      // Truncate if too long
+      let txt = this.loveMsg;
+      while (ctx.measureText(txt).width > cardW - 40 && txt.length > 10) txt = txt.slice(0, -3) + '…';
+      ctx.fillText(txt, cx, cy);
 
       ctx.globalAlpha = 1;
     }
