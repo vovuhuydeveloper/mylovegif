@@ -33,18 +33,18 @@ const LOVE_MESSAGES = [
   '💖 Bé là điều tuyệt vời nhất của anh Tồ!',
 ];
 
-// ---- HASAKI BEAUTY ITEMS ----
+// ---- HASAKI BEAUTY ITEMS (collectible gifts, NOT gold) ----
 const HASAKI_ITEMS = [
-  { id: 'cerave', emoji: '🧴', name: 'Sữa Rửa Mặt Cerave', desc: 'Làm sạch dịu nhẹ với Ceramide, phù hợp da nhạy cảm. Không gây khô, giữ ẩm suốt ngày.', pts: 40, w: 1, sz: 40, hr: 22 },
-  { id: 'serum_ha', emoji: '💧', name: 'Serum Hyaluronic Acid', desc: 'Cấp ẩm sâu 72h, da căng mọng như em bé. Thu hút và giữ nước gấp 1000 lần trọng lượng.', pts: 80, w: 1, sz: 38, hr: 20 },
-  { id: 'anessa', emoji: '☀️', name: 'Kem Chống Nắng Anessa', desc: 'SPF50+ PA++++ bảo vệ da tối đa. Công nghệ chống nước, chống mồ hôi, bền vững cả ngày dài.', pts: 60, w: 1, sz: 40, hr: 22 },
-  { id: 'toner', emoji: '🌸', name: 'Toner Laneige', desc: 'Cân bằng pH sau rửa mặt, cấp ẩm nhẹ. Chuẩn bị da hấp thu dưỡng chất tốt hơn.', pts: 50, w: 1, sz: 40, hr: 22 },
-  { id: 'sleeping_mask', emoji: '💜', name: 'Mặt Nạ Ngủ Laneige', desc: 'Dưỡng ẩm chuyên sâu qua đêm, thức dậy da mềm mịn như lụa. Best seller toàn cầu!', pts: 100, w: 2, sz: 44, hr: 24 },
-  { id: 'retinol', emoji: '🧪', name: 'Retinol The Ordinary', desc: 'Chống lão hoá #1 thế giới! Làm mờ nếp nhăn, tái tạo tế bào, da trẻ trung rạng rỡ.', pts: 120, w: 1, sz: 38, hr: 20 },
-  { id: 'lipstick', emoji: '💄', name: 'Son Black Rouge', desc: 'Lên màu chuẩn chỉnh, giữ màu 12h không trôi. Chất son mịn like velvet, dưỡng môi mềm.', pts: 70, w: 1, sz: 38, hr: 20 },
-  { id: 'bioderma', emoji: '🪞', name: 'Tẩy Trang Bioderma', desc: 'Tẩy sạch mọi lớp makeup mà không gây kích ứng. Nước khoáng Pháp dịu nhẹ cho da.', pts: 45, w: 1, sz: 40, hr: 22 },
-  { id: 'innisfree', emoji: '✨', name: 'Kem Dưỡng Innisfree', desc: 'Dưỡng ẩm tự nhiên từ trà xanh đảo Jeju. Chống oxy hoá, bảo vệ da khỏi ô nhiễm.', pts: 90, w: 2, sz: 44, hr: 24 },
-  { id: 'skii', emoji: '💎', name: 'Tinh Chất SK-II Pitera', desc: 'Thần dược làm đẹp Nhật Bản! Trẻ hoá da, thu nhỏ lỗ chân lông, nâng tông tự nhiên.', pts: 200, w: 1, sz: 38, hr: 20 },
+  { id: 'cerave', emoji: '🧴', name: 'Sữa Rửa Mặt Cerave', desc: 'Làm sạch dịu nhẹ với Ceramide, phù hợp da nhạy cảm. Không gây khô, giữ ẩm suốt ngày.', w: 4, sz: 44, hr: 24, img: 'assets/hasaki/cerave.svg' },
+  { id: 'serum_ha', emoji: '💧', name: 'Serum Hyaluronic Acid', desc: 'Cấp ẩm sâu 72h, da căng mọng như em bé. Thu hút và giữ nước gấp 1000 lần trọng lượng.', w: 3, sz: 42, hr: 22, img: 'assets/hasaki/serum.svg' },
+  { id: 'anessa', emoji: '☀️', name: 'Kem Chống Nắng Anessa', desc: 'SPF50+ PA++++ bảo vệ da tối đa. Công nghệ chống nước, chống mồ hôi, bền vững cả ngày dài.', w: 3, sz: 42, hr: 22, img: 'assets/hasaki/sunscreen.svg' },
+  { id: 'toner', emoji: '🌸', name: 'Toner Laneige', desc: 'Cân bằng pH sau rửa mặt, cấp ẩm nhẹ. Chuẩn bị da hấp thu dưỡng chất tốt hơn.', w: 3, sz: 42, hr: 22, img: 'assets/hasaki/toner.svg' },
+  { id: 'sleeping_mask', emoji: '💜', name: 'Mặt Nạ Ngủ Laneige', desc: 'Dưỡng ẩm chuyên sâu qua đêm, thức dậy da mềm mịn như lụa. Best seller toàn cầu!', w: 4, sz: 46, hr: 26, img: 'assets/hasaki/sleeping_mask.svg' },
+  { id: 'retinol', emoji: '🧪', name: 'Retinol The Ordinary', desc: 'Chống lão hoá #1 thế giới! Làm mờ nếp nhăn, tái tạo tế bào, da trẻ trung rạng rỡ.', w: 3, sz: 42, hr: 22, img: 'assets/hasaki/retinol.svg' },
+  { id: 'lipstick', emoji: '💄', name: 'Son Black Rouge', desc: 'Lên màu chuẩn chỉnh, giữ màu 12h không trôi. Chất son mịn like velvet, dưỡng môi mềm.', w: 3, sz: 42, hr: 22, img: 'assets/hasaki/lipstick.svg' },
+  { id: 'bioderma', emoji: '🪞', name: 'Tẩy Trang Bioderma', desc: 'Tẩy sạch mọi lớp makeup mà không gây kích ứng. Nước khoáng Pháp dịu nhẹ cho da.', w: 3, sz: 42, hr: 22, img: 'assets/hasaki/cleanser.svg' },
+  { id: 'innisfree', emoji: '✨', name: 'Kem Dưỡng Innisfree', desc: 'Dưỡng ẩm tự nhiên từ trà xanh đảo Jeju. Chống oxy hoá, bảo vệ da khỏi ô nhiễm.', w: 4, sz: 46, hr: 26, img: 'assets/hasaki/cream.svg' },
+  { id: 'skii', emoji: '💎', name: 'Tinh Chất SK-II Pitera', desc: 'Thần dược làm đẹp Nhật Bản! Trẻ hoá da, thu nhỏ lỗ chân lông, nâng tông tự nhiên.', w: 4, sz: 44, hr: 24, img: 'assets/hasaki/essence.svg' },
 ];
 
 const LEVELS = [
@@ -346,6 +346,17 @@ class Game {
         this.itemImages[key] = img;
       }
     });
+    // Preload Hasaki images
+    this.hasakiImages = {};
+    HASAKI_ITEMS.forEach(h => {
+      if (h.img) {
+        const img = new Image();
+        img.src = h.img;
+        this.hasakiImages[h.id] = img;
+      }
+    });
+    // Gifts caught during gameplay
+    this.giftsCaught = [];
 
     this.init();
   }
@@ -492,7 +503,7 @@ class Game {
     this.collectedHasaki.forEach((item) => {
       const el = document.createElement('div');
       el.className = 'collection-item';
-      el.innerHTML = `<span class="ci-icon">${item.emoji}</span><span class="ci-name">${item.name}</span><span class="ci-gold">💰 ${item.pts} gold</span>`;
+      el.innerHTML = `<img src="${item.img}" alt="${item.name}" style="width:48px;height:48px"><span class="ci-name">${item.name}</span><span class="ci-gold">🎁 Quà tặng bé</span>`;
       el.onclick = () => this.showItemDetail(item);
       grid.appendChild(el);
     });
@@ -639,6 +650,7 @@ class Game {
     this.hookSt = 'SWING'; this.hookLen = HOOK.min; this.swingT = 0;
     this.grabbed = null; this.particles = []; this.popups = [];
     this.shakeT = 0; this.gameTime = 0;
+    this.giftsCaught = [];
     this.show('screen-game');
     this.resize();
     this.generateItems(lv);
@@ -703,15 +715,16 @@ class Game {
         phase: rand(0, Math.PI * 2), bobSpeed: rand(0.6, 1.0)
       });
     }
-    // Place collected Hasaki items
+    // Place collected Hasaki items (deep zone - harder to reach)
     if (this.collectedHasaki.length > 0) {
+      const deepZoneTop = botY - (botY - topY) * 0.35;
       this.collectedHasaki.forEach((hItem) => {
         const x = rand(leftX + 20, rightX - 20);
-        const y = rand(topY + 30, botY - 30);
+        const y = rand(deepZoneTop, botY - 15);
         this.items.push({
-          type: 'HASAKI', emoji: hItem.emoji, name: hItem.name, pts: hItem.pts,
-          w: hItem.w, sz: hItem.sz, hr: hItem.hr, img: null,
-          msg: `🧴 ${hItem.name}!`,
+          type: 'HASAKI', hasakiId: hItem.id, emoji: hItem.emoji, name: hItem.name,
+          pts: 0, w: hItem.w, sz: hItem.sz, hr: hItem.hr, img: hItem.img,
+          msg: `🎁 ${hItem.name}`,
           x, y, baseY: y, collected: false,
           phase: rand(0, Math.PI * 2), bobSpeed: rand(0.8, 1.5)
         });
@@ -757,6 +770,24 @@ class Game {
 
     document.getElementById('btn-next').querySelector('span').textContent =
       this.lvl < LEVELS.length - 1 ? 'Level Tiếp' : 'Xem Kết Quả';
+
+    // Show gift summary from Hasaki catches
+    let giftsHTML = '';
+    if (this.giftsCaught.length > 0) {
+      giftsHTML = '<div style="margin-top:12px"><div style="font-size:13px;color:#c67dff;font-weight:700;margin-bottom:6px">🎁 Quà đã tặng bé:</div><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">';
+      this.giftsCaught.forEach(g => {
+        giftsHTML += `<div style="text-align:center;background:rgba(255,105,180,0.15);border:1px solid rgba(255,105,180,0.3);border-radius:8px;padding:8px 10px"><span style="font-size:24px">${g.emoji}</span><div style="font-size:10px;color:#ff69b4;margin-top:2px">${g.name}</div></div>`;
+      });
+      giftsHTML += '</div></div>';
+    }
+    let giftSummaryEl = document.getElementById('gifts-summary');
+    if (!giftSummaryEl) {
+      giftSummaryEl = document.createElement('div');
+      giftSummaryEl.id = 'gifts-summary';
+      document.querySelector('#screen-result .glass-card').appendChild(giftSummaryEl);
+    }
+    giftSummaryEl.innerHTML = giftsHTML;
+
     this.show('screen-result');
   }
 
@@ -879,6 +910,30 @@ class Game {
         if (this.score >= LEVELS[this.lvl].target) this.endLevel();
         else { this.score = LEVELS[this.lvl].target; this.endLevel(); }
       }, 1200);
+      return;
+    }
+
+    // HASAKI items = collectible gifts (no gold!)
+    if (item.type === 'HASAKI') {
+      this.giftsCaught.push(item);
+      // Celebration particles
+      for (let i = 0; i < 12; i++) {
+        this.particles.push(new Particle(this.pivotX, this.pivotY, {
+          color: ['#ff69b4', '#c67dff', '#ffc857', '#00d2ff'][randInt(0, 3)],
+          size: rand(3, 7), vy: rand(-180, -60), vx: rand(-100, 100), life: rand(1, 1.5)
+        }));
+      }
+      ['🎁', '💝', '✨'].forEach((em) => {
+        this.particles.push(new Particle(this.pivotX + rand(-20, 20), this.pivotY - 10, {
+          emoji: em, emojiSize: 22, vy: rand(-120, -50), vx: rand(-60, 60), gravity: 100, life: 1.2
+        }));
+      });
+      this.popups.push(new Popup(this.pivotX, this.pivotY - 25, `🎁 ${item.name}`, '#ff69b4'));
+      this.popups.push(new Popup(this.pivotX, this.pivotY + 5, 'Quà tặng bé!', '#c67dff'));
+      this.sfx.gift(); this.shakeT = 0.2;
+      const msg = `💝 Anh Tồ tặng bé ${item.name} nè!`;
+      this.showLoveMessage(msg);
+      this.updateHUD();
       return;
     }
 
@@ -1112,6 +1167,22 @@ class Game {
           ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
           ctx.fillText('📸', it.x, it.y);
         }
+      } else if (it.type === 'HASAKI') {
+        // ---- Hasaki gift items with SVG + glow ----
+        ctx.shadowColor = '#ff69b4'; ctx.shadowBlur = 16 + Math.sin(t * 2.5 + it.phase) * 6;
+        const hSprite = this.hasakiImages[it.hasakiId];
+        if (hSprite && hSprite.complete && hSprite.naturalWidth > 0) {
+          const s = it.sz;
+          ctx.drawImage(hSprite, it.x - s / 2, it.y - s / 2, s, s);
+        } else {
+          ctx.font = `${it.sz}px serif`;
+          ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+          ctx.fillText(it.emoji, it.x, it.y);
+        }
+        // Gift ribbon indicator
+        ctx.shadowBlur = 0;
+        ctx.font = '16px serif'; ctx.textAlign = 'center';
+        ctx.fillText('🎁', it.x, it.y - it.sz / 2 - 8);
       } else {
         // ---- Regular items ----
         const radius = it.sz / 2;
@@ -1175,7 +1246,12 @@ class Game {
     // Grabbed item (draw at hook tip using sprite)
     if (this.grabbed) {
       const gi = this.grabbed;
-      const sprite = this.itemImages[gi.type];
+      let sprite;
+      if (gi.type === 'HASAKI') {
+        sprite = this.hasakiImages[gi.hasakiId];
+      } else {
+        sprite = this.itemImages[gi.type];
+      }
       if (sprite && sprite.complete && sprite.naturalWidth > 0) {
         const s = gi.sz;
         ctx.drawImage(sprite, tipX - s / 2, tipY + 20 - s / 2, s, s);
