@@ -835,7 +835,7 @@ class Game {
 
     // ---- Items ----
     this.items.forEach(it => {
-      if (it.collected) return;
+      if (it.collected || it === this.grabbed) return;
       ctx.save();
 
       if (it.type === 'MYPHOTO') {
@@ -947,11 +947,18 @@ class Game {
       ctx.stroke();
     });
 
-    // Grabbed item
+    // Grabbed item (draw at hook tip using sprite)
     if (this.grabbed) {
-      ctx.font = `${this.grabbed.sz}px serif`;
-      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.fillText(this.grabbed.emoji, tipX, tipY + 20);
+      const gi = this.grabbed;
+      const sprite = this.itemImages[gi.type];
+      if (sprite && sprite.complete && sprite.naturalWidth > 0) {
+        const s = gi.sz;
+        ctx.drawImage(sprite, tipX - s / 2, tipY + 20 - s / 2, s, s);
+      } else {
+        ctx.font = `${gi.sz}px serif`;
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(gi.emoji, tipX, tipY + 20);
+      }
     }
 
     // Machine
