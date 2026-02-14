@@ -82,6 +82,113 @@ class SFX {
   boom() { this.play(80, 0.3, 'sawtooth', 0.15); this.play(120, 0.2, 'square', 0.1); }
 }
 
+// ---- BACKGROUND MUSIC (Procedural Web Audio API) ----
+class BGM {
+  constructor() {
+    this.ctx = null;
+    this.playing = false;
+    this.masterGain = null;
+    this.interval = null;
+    this.volume = 0.35;
+    try { this.ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch { }
+  }
+
+  start() {
+    if (!this.ctx || this.playing) return;
+    if (this.ctx.state === 'suspended') this.ctx.resume();
+    this.playing = true;
+
+    // Master volume
+    this.masterGain = this.ctx.createGain();
+    this.masterGain.gain.value = this.volume;
+    this.masterGain.connect(this.ctx.destination);
+
+    // Chord progressions (romantic): C - Am - F - G
+    const chords = [
+      [261.63, 329.63, 392.00],  // C major
+      [220.00, 261.63, 329.63],  // A minor
+      [174.61, 220.00, 261.63],  // F major
+      [196.00, 246.94, 293.66],  // G major
+    ];
+
+    // Melody notes for arpeggio
+    const melodies = [
+      [523.25, 659.25, 783.99, 659.25],  // C5 E5 G5 E5
+      [440.00, 523.25, 659.25, 523.25],  // A4 C5 E5 C5
+      [349.23, 440.00, 523.25, 440.00],  // F4 A4 C5 A4
+      [392.00, 493.88, 587.33, 493.88],  // G4 B4 D5 B4
+    ];
+
+    let chordIdx = 0;
+    let noteIdx = 0;
+    const bpm = 72;
+    const beatDur = 60 / bpm;
+
+    // Play pad chord
+    const playPad = () => {
+      if (!this.playing || !this.ctx) return;
+      const chord = chords[chordIdx];
+      chord.forEach(freq => {
+        const o = this.ctx.createOscillator();
+        const g = this.ctx.createGain();
+        o.type = 'sine';
+        o.frequency.value = freq;
+        g.gain.setValueAtTime(0, this.ctx.currentTime);
+        g.gain.linearRampToValueAtTime(0.06, this.ctx.currentTime + 0.3);
+        g.gain.linearRampToValueAtTime(0.04, this.ctx.currentTime + beatDur * 3.5);
+        g.gain.linearRampToValueAtTime(0, this.ctx.currentTime + beatDur * 4);
+        o.connect(g); g.connect(this.masterGain);
+        o.start(); o.stop(this.ctx.currentTime + beatDur * 4);
+      });
+    };
+
+    // Play arpeggio note
+    const playNote = () => {
+      if (!this.playing || !this.ctx) return;
+      const freq = melodies[chordIdx][noteIdx];
+      const o = this.ctx.createOscillator();
+      const g = this.ctx.createGain();
+      o.type = 'triangle';
+      o.frequency.value = freq;
+      g.gain.setValueAtTime(0, this.ctx.currentTime);
+      g.gain.linearRampToValueAtTime(0.08, this.ctx.currentTime + 0.05);
+      g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + beatDur * 0.9);
+      o.connect(g); g.connect(this.masterGain);
+      o.start(); o.stop(this.ctx.currentTime + beatDur);
+
+      noteIdx++;
+      if (noteIdx >= 4) {
+        noteIdx = 0;
+        chordIdx = (chordIdx + 1) % chords.length;
+      }
+    };
+
+    // Start music loop
+    playPad();
+    playNote();
+    let beat = 0;
+    this.interval = setInterval(() => {
+      if (!this.playing) { clearInterval(this.interval); return; }
+      beat++;
+      playNote();
+      if (beat % 4 === 0) playPad();
+    }, beatDur * 1000);
+  }
+
+  stop() {
+    this.playing = false;
+    if (this.interval) { clearInterval(this.interval); this.interval = null; }
+    if (this.masterGain) {
+      try { this.masterGain.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 0.5); } catch { }
+    }
+  }
+
+  setVolume(v) {
+    this.volume = v;
+    if (this.masterGain) this.masterGain.gain.value = v;
+  }
+}
+
 // ---- PARTICLE ----
 class Particle {
   constructor(x, y, opts = {}) {
@@ -190,6 +297,7 @@ class Game {
     this.gc = document.getElementById('game-canvas');
     this.ctx = this.gc.getContext('2d');
     this.sfx = new SFX();
+    this.bgm = new BGM();
     this.bg = new BGRenderer(document.getElementById('bg-canvas'));
     this.screens = {};
     ['screen-welcome', 'screen-level', 'screen-game', 'screen-result', 'screen-end']
@@ -334,6 +442,7 @@ class Game {
     this.generateItems(lv);
     this.updateHUD();
     this.paused = false;
+    this.bgm.start();
   }
 
   generateItems(lv) {
@@ -396,6 +505,7 @@ class Game {
 
   endLevel() {
     this.paused = true;
+    this.bgm.stop();
     const lv = LEVELS[this.lvl];
     const won = this.score >= lv.target;
     this.total += this.score;
