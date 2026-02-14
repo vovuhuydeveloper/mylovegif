@@ -49,15 +49,15 @@ const HASAKI_ITEMS = [
 
 const LEVELS = [
   {
-    name: 'Tình yêu nảy nở 🌱', target: 300, time: 60, swing: 1.8,
+    name: 'Tình yêu nảy nở 🌱', target: 300, time: 35, swing: 1.8,
     spawn: [['LETTER', 4], ['CHOCOLATE', 3], ['ROSE', 2], ['TEDDY', 1], ['ROCK', 2], ['CLOUD', 1], ['MYPHOTO', 1]]
   },
   {
-    name: 'Yêu thương lớn dần 🌸', target: 500, time: 55, swing: 2.2,
+    name: 'Yêu thương lớn dần 🌸', target: 500, time: 30, swing: 2.2,
     spawn: [['LETTER', 3], ['CHOCOLATE', 3], ['ROSE', 2], ['TEDDY', 2], ['HEART', 1], ['DIAMOND', 1], ['ROCK', 3], ['CLOUD', 2], ['TNT', 1], ['MYPHOTO', 1]]
   },
   {
-    name: 'Tình yêu bất diệt 💖', target: 700, time: 50, swing: 2.6,
+    name: 'Tình yêu bất diệt 💖', target: 700, time: 25, swing: 2.6,
     spawn: [['LETTER', 2], ['CHOCOLATE', 2], ['ROSE', 2], ['TEDDY', 1], ['HEART', 2], ['DIAMOND', 1], ['RING', 1], ['ROCK', 4], ['CLOUD', 2], ['TNT', 1], ['MYPHOTO', 1]]
   },
 ];
@@ -574,12 +574,14 @@ class Game {
 
       for (let h of hearts) {
         if (!h.alive) continue;
-        if (Math.hypot(px - h.x, py - h.y) < h.sz) {
+        if (Math.hypot(px - h.x, py - h.y) < h.sz * 1.5) { // bigger hit area for mobile
           h.alive = false;
           caught++;
-          this.bonusTime = caught * 3;
+          this.bonusTime += 3;
           document.getElementById('hc-bonus').textContent = `+${this.bonusTime}s`;
           this.sfx.grab();
+          // Vibrate on mobile
+          if (navigator.vibrate) navigator.vibrate(50);
           break;
         }
       }
@@ -911,6 +913,7 @@ class Game {
       this.popups.push(new Popup(this.pivotX, this.pivotY - 20, '💖 +' + bonus + ' gold!', '#ff4d8d'));
       this.popups.push(new Popup(this.pivotX, this.pivotY - 50, '🎉 QUA MÀN!', '#ffc857'));
       this.sfx.fever(); this.sfx.gift(); this.shakeT = 0.4;
+      if (navigator.vibrate) navigator.vibrate(300);
       this.updateHUD();
       // Auto win after short delay
       setTimeout(() => {
@@ -938,6 +941,7 @@ class Game {
       this.popups.push(new Popup(this.pivotX, this.pivotY - 25, `🎁 ${item.name}`, '#ff69b4'));
       this.popups.push(new Popup(this.pivotX, this.pivotY + 5, 'Quà tặng bé!', '#c67dff'));
       this.sfx.gift(); this.shakeT = 0.2;
+      if (navigator.vibrate) navigator.vibrate(100);
       const msg = `💝 Anh Tồ tặng bé ${item.name} nè!`;
       this.showLoveMessage(msg);
       this.updateHUD();
@@ -957,6 +961,7 @@ class Game {
       this.popups.push(new Popup(this.pivotX, this.pivotY, '💥 BOOM!', '#ff4400'));
       if (bonus > 0) { this.score += bonus; this.popups.push(new Popup(this.pivotX, this.pivotY + 25, '+' + bonus + ' gold', '#ffc857')); }
       this.sfx.boom(); this.shakeT = 0.3;
+      if (navigator.vibrate) navigator.vibrate(200);
       this.combo = 0; this.multi = 1;
     } else {
       const pts = item.pts * this.multi;
@@ -980,6 +985,7 @@ class Game {
         this.sfx.gift();
       } else {
         this.sfx.grab();
+        if (navigator.vibrate) navigator.vibrate(30);
       }
 
       // Combo
