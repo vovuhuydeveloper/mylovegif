@@ -33,6 +33,20 @@ const LOVE_MESSAGES = [
   '💖 Bé là điều tuyệt vời nhất của anh Tồ!',
 ];
 
+// ---- HASAKI BEAUTY ITEMS ----
+const HASAKI_ITEMS = [
+  { id: 'cerave', emoji: '🧴', name: 'Sữa Rửa Mặt Cerave', desc: 'Làm sạch dịu nhẹ với Ceramide, phù hợp da nhạy cảm. Không gây khô, giữ ẩm suốt ngày.', pts: 40, w: 1, sz: 40, hr: 22 },
+  { id: 'serum_ha', emoji: '💧', name: 'Serum Hyaluronic Acid', desc: 'Cấp ẩm sâu 72h, da căng mọng như em bé. Thu hút và giữ nước gấp 1000 lần trọng lượng.', pts: 80, w: 1, sz: 38, hr: 20 },
+  { id: 'anessa', emoji: '☀️', name: 'Kem Chống Nắng Anessa', desc: 'SPF50+ PA++++ bảo vệ da tối đa. Công nghệ chống nước, chống mồ hôi, bền vững cả ngày dài.', pts: 60, w: 1, sz: 40, hr: 22 },
+  { id: 'toner', emoji: '🌸', name: 'Toner Laneige', desc: 'Cân bằng pH sau rửa mặt, cấp ẩm nhẹ. Chuẩn bị da hấp thu dưỡng chất tốt hơn.', pts: 50, w: 1, sz: 40, hr: 22 },
+  { id: 'sleeping_mask', emoji: '💜', name: 'Mặt Nạ Ngủ Laneige', desc: 'Dưỡng ẩm chuyên sâu qua đêm, thức dậy da mềm mịn như lụa. Best seller toàn cầu!', pts: 100, w: 2, sz: 44, hr: 24 },
+  { id: 'retinol', emoji: '🧪', name: 'Retinol The Ordinary', desc: 'Chống lão hoá #1 thế giới! Làm mờ nếp nhăn, tái tạo tế bào, da trẻ trung rạng rỡ.', pts: 120, w: 1, sz: 38, hr: 20 },
+  { id: 'lipstick', emoji: '💄', name: 'Son Black Rouge', desc: 'Lên màu chuẩn chỉnh, giữ màu 12h không trôi. Chất son mịn like velvet, dưỡng môi mềm.', pts: 70, w: 1, sz: 38, hr: 20 },
+  { id: 'bioderma', emoji: '🪞', name: 'Tẩy Trang Bioderma', desc: 'Tẩy sạch mọi lớp makeup mà không gây kích ứng. Nước khoáng Pháp dịu nhẹ cho da.', pts: 45, w: 1, sz: 40, hr: 22 },
+  { id: 'innisfree', emoji: '✨', name: 'Kem Dưỡng Innisfree', desc: 'Dưỡng ẩm tự nhiên từ trà xanh đảo Jeju. Chống oxy hoá, bảo vệ da khỏi ô nhiễm.', pts: 90, w: 2, sz: 44, hr: 24 },
+  { id: 'skii', emoji: '💎', name: 'Tinh Chất SK-II Pitera', desc: 'Thần dược làm đẹp Nhật Bản! Trẻ hoá da, thu nhỏ lỗ chân lông, nâng tông tự nhiên.', pts: 200, w: 1, sz: 38, hr: 20 },
+];
+
 const LEVELS = [
   {
     name: 'Tình yêu nảy nở 🌱', target: 300, time: 60, swing: 1.8,
@@ -300,7 +314,7 @@ class Game {
     this.bgm = new BGM();
     this.bg = new BGRenderer(document.getElementById('bg-canvas'));
     this.screens = {};
-    ['screen-welcome', 'screen-level', 'screen-game', 'screen-result', 'screen-end']
+    ['screen-welcome', 'screen-category', 'screen-spin', 'screen-collection', 'screen-heartcatch', 'screen-level', 'screen-game', 'screen-result', 'screen-end']
       .forEach(id => this.screens[id] = document.getElementById(id));
 
     // State
@@ -308,6 +322,9 @@ class Game {
     this.lvl = 0; this.score = 0; this.total = 0; this.timer = 0;
     this.items = []; this.particles = []; this.popups = [];
     this.hookAng = 0; this.hookLen = HOOK.min; this.hookSt = 'SWING';
+    // Hasaki collection
+    this.collectedHasaki = [];
+    this.bonusTime = 0;
     this.shootAng = 0; this.grabbed = null; this.swingT = 0;
     this.combo = 0; this.multi = 1; this.fever = false; this.feverT = 0;
     this.paused = true; this.lastT = 0;
@@ -359,10 +376,26 @@ class Game {
   setupUI() {
     const $ = id => document.getElementById(id);
     $('btn-start').onclick = () => this.startGame();
-    $('btn-play').onclick = () => this.beginPlay();
+    $('btn-play').onclick = () => this.showHeartCatch();
     $('btn-next').onclick = () => this.nextLevel();
     $('btn-restart').onclick = () => this.restart();
     $('gift-box').onclick = () => this.openGift();
+
+    // Category
+    $('btn-cat-next').onclick = () => this.show('screen-spin');
+    $('btn-cat-skip').onclick = () => { this.collectedHasaki = []; this.showLevelIntro(); };
+
+    // Spin
+    $('btn-spin').onclick = () => this.doSpin();
+    $('btn-spin-done').onclick = () => this.showCollection();
+
+    // Collection
+    $('btn-collection-play').onclick = () => this.showLevelIntro();
+    $('btn-modal-close').onclick = () => document.getElementById('item-detail-modal').classList.add('hidden');
+
+    // Heart catch
+    $('btn-hc-start').onclick = () => this.startHeartCatch();
+    $('btn-hc-skip').onclick = () => this.beginPlay();
 
     // Photo uploads
     $('photo-me').addEventListener('change', (e) => this.handlePhoto(e, 'me'));
@@ -414,7 +447,176 @@ class Game {
     const n1 = document.getElementById('inp-name1').value.trim() || 'Bạn';
     const n2 = document.getElementById('inp-name2').value.trim() || 'Người yêu';
     this.names = [n1, n2]; this.total = 0; this.lvl = 0;
-    this.showLevelIntro();
+    this.collectedHasaki = []; this.bonusTime = 0;
+    this.show('screen-category');
+  }
+
+  // ---- SPIN WHEEL ----
+  doSpin() {
+    const slots = [document.getElementById('slot-1'), document.getElementById('slot-2'), document.getElementById('slot-3')];
+    const btnSpin = document.getElementById('btn-spin');
+    const btnDone = document.getElementById('btn-spin-done');
+    btnSpin.classList.add('hidden');
+
+    // Shuffle and pick 3 unique items
+    const shuffled = [...HASAKI_ITEMS].sort(() => Math.random() - 0.5);
+    const picked = shuffled.slice(0, 3);
+
+    // Start spinning animation
+    slots.forEach(s => { s.classList.add('spinning'); s.querySelector('.slot-icon').textContent = '❓'; });
+
+    // Reveal one by one
+    picked.forEach((item, i) => {
+      setTimeout(() => {
+        const slot = slots[i];
+        slot.classList.remove('spinning');
+        slot.classList.add('revealed');
+        slot.querySelector('.slot-icon').textContent = item.emoji;
+        this.sfx.grab();
+        if (i === 2) {
+          // All revealed
+          this.collectedHasaki = picked;
+          setTimeout(() => {
+            this.sfx.gift();
+            btnDone.classList.remove('hidden');
+          }, 400);
+        }
+      }, 800 + i * 700);
+    });
+  }
+
+  // ---- COLLECTION VIEW ----
+  showCollection() {
+    const grid = document.getElementById('collection-grid');
+    grid.innerHTML = '';
+    this.collectedHasaki.forEach((item) => {
+      const el = document.createElement('div');
+      el.className = 'collection-item';
+      el.innerHTML = `<span class="ci-icon">${item.emoji}</span><span class="ci-name">${item.name}</span><span class="ci-gold">💰 ${item.pts} gold</span>`;
+      el.onclick = () => this.showItemDetail(item);
+      grid.appendChild(el);
+    });
+    this.show('screen-collection');
+  }
+
+  showItemDetail(item) {
+    document.getElementById('modal-icon').textContent = item.emoji;
+    document.getElementById('modal-title').textContent = item.name;
+    document.getElementById('modal-desc').textContent = item.desc;
+    document.getElementById('modal-gold').textContent = `💰 ${item.pts} gold trong game`;
+    document.getElementById('item-detail-modal').classList.remove('hidden');
+  }
+
+  // ---- HEART CATCH MINI-GAME ----
+  showHeartCatch() {
+    this.bonusTime = 0;
+    document.getElementById('hc-bonus').textContent = '+0s';
+    document.getElementById('hc-timer').textContent = '10';
+    document.getElementById('hc-overlay').classList.remove('hidden');
+    this.show('screen-heartcatch');
+    // Setup canvas
+    const canvas = document.getElementById('heartcatch-canvas');
+    canvas.width = Math.min(window.innerWidth, 500);
+    canvas.height = window.innerHeight;
+  }
+
+  startHeartCatch() {
+    document.getElementById('hc-overlay').classList.add('hidden');
+    const canvas = document.getElementById('heartcatch-canvas');
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    let timer = 10;
+    let caught = 0;
+    const maxCatch = 5;
+    const hearts = [];
+    let running = true;
+    let lastT = performance.now();
+
+    // Spawn hearts
+    const spawnHeart = () => {
+      hearts.push({
+        x: 30 + Math.random() * (W - 60),
+        y: -40,
+        vy: 120 + Math.random() * 80,
+        sz: 30 + Math.random() * 15,
+        emoji: ['❤️', '💕', '💖', '💗', '💓'][Math.floor(Math.random() * 5)],
+        alive: true
+      });
+    };
+
+    // Touch/click handler
+    const handleClick = (e) => {
+      if (!running || caught >= maxCatch) return;
+      const rect = canvas.getBoundingClientRect();
+      const cx = (e.clientX || e.touches[0].clientX) - rect.left;
+      const cy = (e.clientY || e.touches[0].clientY) - rect.top;
+      const scaleX = W / rect.width;
+      const scaleY = H / rect.height;
+      const px = cx * scaleX, py = cy * scaleY;
+
+      for (let h of hearts) {
+        if (!h.alive) continue;
+        if (Math.hypot(px - h.x, py - h.y) < h.sz) {
+          h.alive = false;
+          caught++;
+          this.bonusTime = caught * 3;
+          document.getElementById('hc-bonus').textContent = `+${this.bonusTime}s`;
+          this.sfx.grab();
+          break;
+        }
+      }
+    };
+    canvas.addEventListener('click', handleClick);
+    canvas.addEventListener('touchstart', (e) => { e.preventDefault(); handleClick(e); }, { passive: false });
+
+    let spawnT = 0;
+    const loop = (now) => {
+      if (!running) return;
+      const dt = Math.min((now - lastT) / 1000, 0.05);
+      lastT = now;
+
+      timer -= dt;
+      document.getElementById('hc-timer').textContent = Math.ceil(timer);
+
+      // Spawn
+      spawnT -= dt;
+      if (spawnT <= 0 && caught < maxCatch) {
+        spawnHeart();
+        spawnT = 0.6 + Math.random() * 0.5;
+      }
+
+      // Update hearts
+      hearts.forEach(h => { if (h.alive) h.y += h.vy * dt; });
+
+      // Draw
+      ctx.clearRect(0, 0, W, H);
+      // Background gradient
+      const bg = ctx.createLinearGradient(0, 0, 0, H);
+      bg.addColorStop(0, '#1a0533'); bg.addColorStop(1, '#0d0221');
+      ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+
+      // Draw hearts
+      hearts.forEach(h => {
+        if (!h.alive || h.y > H + 50) return;
+        ctx.font = `${h.sz}px serif`;
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(h.emoji, h.x, h.y);
+      });
+
+      // Draw score
+      ctx.font = "bold 18px 'Baloo 2', cursive";
+      ctx.fillStyle = '#fff'; ctx.textAlign = 'center';
+      ctx.fillText(`❤️ ${caught} / ${maxCatch}`, W / 2, H - 40);
+
+      if (timer <= 0 || caught >= maxCatch) {
+        running = false;
+        canvas.removeEventListener('click', handleClick);
+        setTimeout(() => this.beginPlay(), 800);
+        return;
+      }
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
   }
 
   showLevelIntro() {
@@ -432,7 +634,7 @@ class Game {
 
   beginPlay() {
     const lv = LEVELS[this.lvl];
-    this.score = 0; this.timer = lv.time; this.combo = 0; this.multi = 1;
+    this.score = 0; this.timer = lv.time + this.bonusTime; this.combo = 0; this.multi = 1;
     this.fever = false; this.feverT = 0;
     this.hookSt = 'SWING'; this.hookLen = HOOK.min; this.swingT = 0;
     this.grabbed = null; this.particles = []; this.popups = [];
@@ -499,6 +701,20 @@ class Game {
       this.items.push({
         type: 'MYPHOTO', ...def, x, y, baseY: y, collected: false,
         phase: rand(0, Math.PI * 2), bobSpeed: rand(0.6, 1.0)
+      });
+    }
+    // Place collected Hasaki items
+    if (this.collectedHasaki.length > 0) {
+      this.collectedHasaki.forEach((hItem) => {
+        const x = rand(leftX + 20, rightX - 20);
+        const y = rand(topY + 30, botY - 30);
+        this.items.push({
+          type: 'HASAKI', emoji: hItem.emoji, name: hItem.name, pts: hItem.pts,
+          w: hItem.w, sz: hItem.sz, hr: hItem.hr, img: null,
+          msg: `🧴 ${hItem.name}!`,
+          x, y, baseY: y, collected: false,
+          phase: rand(0, Math.PI * 2), bobSpeed: rand(0.8, 1.5)
+        });
       });
     }
   }
@@ -570,7 +786,16 @@ class Game {
     this.show('screen-end');
   }
 
-  restart() { this.total = 0; this.lvl = 0; this.show('screen-welcome'); }
+  restart() {
+    this.total = 0; this.lvl = 0;
+    this.collectedHasaki = []; this.bonusTime = 0;
+    // Reset spin UI
+    const slots = [document.getElementById('slot-1'), document.getElementById('slot-2'), document.getElementById('slot-3')];
+    slots.forEach(s => { s.classList.remove('spinning', 'revealed'); s.querySelector('.slot-icon').textContent = '❓'; });
+    document.getElementById('btn-spin').classList.remove('hidden');
+    document.getElementById('btn-spin-done').classList.add('hidden');
+    this.show('screen-welcome');
+  }
 
   // ---- HOOK ----
   shoot() {
@@ -611,7 +836,7 @@ class Game {
       }
     } else if (this.hookSt === 'RETRACT') {
       const w = this.grabbed ? this.grabbed.w : 0;
-      const spd = HOOK.retractSpd / (1 + w * 0.4);
+      const spd = HOOK.retractSpd / (1 + w * 0.8);
       this.hookLen -= spd * dt;
       if (this.grabbed) {
         const a = this.shootAng;

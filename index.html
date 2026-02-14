@@ -60,6 +60,96 @@
     </div>
   </div>
 
+  <!-- ===== CATEGORY SELECT ===== -->
+  <div id="screen-category" class="screen">
+    <div class="glass-card category-card animate-in">
+      <h2 class="section-title">🛍️ Chọn Bộ Sưu Tập</h2>
+      <p class="section-sub">Thu thập vật phẩm trước khi đào vàng!</p>
+      <div class="category-grid">
+        <button class="category-btn selected" id="cat-hasaki" data-cat="hasaki">
+          <span class="cat-icon">🧴</span>
+          <span class="cat-name">Hasaki</span>
+          <span class="cat-desc">Mỹ phẩm hot</span>
+        </button>
+      </div>
+      <button id="btn-cat-next" class="btn-glow">
+        <span>Thu Thập Ngay!</span>
+        <i>🎰</i>
+      </button>
+      <button id="btn-cat-skip" class="btn-link">Bỏ qua →</button>
+    </div>
+  </div>
+
+  <!-- ===== SPIN WHEEL MINI-GAME ===== -->
+  <div id="screen-spin" class="screen">
+    <div class="glass-card spin-card animate-in">
+      <h2 class="section-title">🎰 Quay Số May Mắn!</h2>
+      <p class="section-sub">Nhận 3 sản phẩm Hasaki ngẫu nhiên</p>
+      <div class="spin-area">
+        <div class="spin-slots" id="spin-slots">
+          <div class="spin-slot" id="slot-1"><span class="slot-icon">❓</span></div>
+          <div class="spin-slot" id="slot-2"><span class="slot-icon">❓</span></div>
+          <div class="spin-slot" id="slot-3"><span class="slot-icon">❓</span></div>
+        </div>
+      </div>
+      <button id="btn-spin" class="btn-glow spin-btn">
+        <span>🎰 QUAY!</span>
+      </button>
+      <button id="btn-spin-done" class="btn-glow hidden">
+        <span>Xem Bộ Sưu Tập</span>
+        <i>📦</i>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== COLLECTION VIEW ===== -->
+  <div id="screen-collection" class="screen">
+    <div class="glass-card collection-card animate-in">
+      <h2 class="section-title">📦 Bộ Sưu Tập Của Bạn</h2>
+      <p class="section-sub">Nhấn vào sản phẩm để xem chi tiết!</p>
+      <div class="collection-grid" id="collection-grid"></div>
+      <button id="btn-collection-play" class="btn-glow">
+        <span>Vào Đào Vàng!</span>
+        <i>⛏️</i>
+      </button>
+    </div>
+    <!-- Item detail modal -->
+    <div id="item-detail-modal" class="modal hidden">
+      <div class="modal-content glass-card">
+        <div class="modal-icon" id="modal-icon">🧴</div>
+        <h3 class="modal-title" id="modal-title">Sản phẩm</h3>
+        <p class="modal-desc" id="modal-desc">Mô tả công dụng</p>
+        <div class="modal-gold" id="modal-gold">💰 50 gold</div>
+        <button class="btn-glow modal-close" id="btn-modal-close">
+          <span>OK!</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HEART CATCH MINI-GAME ===== -->
+  <div id="screen-heartcatch" class="screen">
+    <div class="heartcatch-wrap">
+      <div class="heartcatch-hud">
+        <div class="hc-timer" id="hc-timer">10</div>
+        <div class="hc-bonus" id="hc-bonus">+0s</div>
+      </div>
+      <canvas id="heartcatch-canvas"></canvas>
+      <div class="heartcatch-overlay" id="hc-overlay">
+        <div class="glass-card hc-intro animate-in">
+          <h2>💕 Bắt Tim!</h2>
+          <p>Chạm vào trái tim rơi để kiếm thêm thời gian!</p>
+          <p class="hc-rule">❤️ = +3 giây (tối đa +15s)</p>
+          <button id="btn-hc-start" class="btn-glow">
+            <span>Chơi!</span>
+            <i>💕</i>
+          </button>
+          <button id="btn-hc-skip" class="btn-link">Bỏ qua →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== LEVEL INTRO ===== -->
   <div id="screen-level" class="screen">
     <div class="glass-card level-card animate-in">
