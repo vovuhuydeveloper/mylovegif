@@ -35,16 +35,16 @@ const LOVE_MESSAGES = [
 
 // ---- HASAKI BEAUTY ITEMS (collectible gifts, NOT gold) ----
 const HASAKI_ITEMS = [
-  { id: 'cerave', emoji: '🧴', name: 'Sữa Rửa Mặt Cerave', desc: 'Làm sạch dịu nhẹ với Ceramide, phù hợp da nhạy cảm. Không gây khô, giữ ẩm suốt ngày.', w: 4, sz: 44, hr: 24, img: 'assets/hasaki/cerave.svg' },
-  { id: 'serum_ha', emoji: '💧', name: 'Serum Hyaluronic Acid', desc: 'Cấp ẩm sâu 72h, da căng mọng như em bé. Thu hút và giữ nước gấp 1000 lần trọng lượng.', w: 3, sz: 42, hr: 22, img: 'assets/hasaki/serum.svg' },
-  { id: 'anessa', emoji: '☀️', name: 'Kem Chống Nắng Anessa', desc: 'SPF50+ PA++++ bảo vệ da tối đa. Công nghệ chống nước, chống mồ hôi, bền vững cả ngày dài.', w: 3, sz: 42, hr: 22, img: 'assets/hasaki/sunscreen.svg' },
-  { id: 'toner', emoji: '🌸', name: 'Toner Laneige', desc: 'Cân bằng pH sau rửa mặt, cấp ẩm nhẹ. Chuẩn bị da hấp thu dưỡng chất tốt hơn.', w: 3, sz: 42, hr: 22, img: 'assets/hasaki/toner.svg' },
-  { id: 'sleeping_mask', emoji: '💜', name: 'Mặt Nạ Ngủ Laneige', desc: 'Dưỡng ẩm chuyên sâu qua đêm, thức dậy da mềm mịn như lụa. Best seller toàn cầu!', w: 4, sz: 46, hr: 26, img: 'assets/hasaki/sleeping_mask.svg' },
-  { id: 'retinol', emoji: '🧪', name: 'Retinol The Ordinary', desc: 'Chống lão hoá #1 thế giới! Làm mờ nếp nhăn, tái tạo tế bào, da trẻ trung rạng rỡ.', w: 3, sz: 42, hr: 22, img: 'assets/hasaki/retinol.svg' },
-  { id: 'lipstick', emoji: '💄', name: 'Son Black Rouge', desc: 'Lên màu chuẩn chỉnh, giữ màu 12h không trôi. Chất son mịn like velvet, dưỡng môi mềm.', w: 3, sz: 42, hr: 22, img: 'assets/hasaki/lipstick.svg' },
-  { id: 'bioderma', emoji: '🪞', name: 'Tẩy Trang Bioderma', desc: 'Tẩy sạch mọi lớp makeup mà không gây kích ứng. Nước khoáng Pháp dịu nhẹ cho da.', w: 3, sz: 42, hr: 22, img: 'assets/hasaki/cleanser.svg' },
-  { id: 'innisfree', emoji: '✨', name: 'Kem Dưỡng Innisfree', desc: 'Dưỡng ẩm tự nhiên từ trà xanh đảo Jeju. Chống oxy hoá, bảo vệ da khỏi ô nhiễm.', w: 4, sz: 46, hr: 26, img: 'assets/hasaki/cream.svg' },
-  { id: 'skii', emoji: '💎', name: 'Tinh Chất SK-II Pitera', desc: 'Thần dược làm đẹp Nhật Bản! Trẻ hoá da, thu nhỏ lỗ chân lông, nâng tông tự nhiên.', w: 4, sz: 44, hr: 24, img: 'assets/hasaki/essence.svg' },
+  { id: 'cerave', emoji: '🧴', name: 'Sữa Rửa Mặt Cerave', desc: 'Làm sạch dịu nhẹ với Ceramide, phù hợp da nhạy cảm. Không gây khô, giữ ẩm suốt ngày.', w: 4, sz: 44, hr: 24, img: 'assets/hasaki/cerave.png' },
+  { id: 'serum_ha', emoji: '💧', name: 'Serum Hyaluronic Acid', desc: 'Cấp ẩm sâu 72h, da căng mọng như em bé. Thu hút và giữ nước gấp 1000 lần trọng lượng.', w: 3, sz: 42, hr: 22, img: 'assets/hasaki/serum.png' },
+  { id: 'anessa', emoji: '☀️', name: 'Kem Chống Nắng Anessa', desc: 'SPF50+ PA++++ bảo vệ da tối đa. Công nghệ chống nước, chống mồ hôi, bền vững cả ngày dài.', w: 3, sz: 42, hr: 22, img: 'assets/hasaki/sunscreen.png' },
+  { id: 'toner', emoji: '🌸', name: 'Toner Laneige', desc: 'Cân bằng pH sau rửa mặt, cấp ẩm nhẹ. Chuẩn bị da hấp thu dưỡng chất tốt hơn.', w: 3, sz: 42, hr: 22, img: 'assets/hasaki/toner.png' },
+  { id: 'sleeping_mask', emoji: '💜', name: 'Mặt Nạ Ngủ Laneige', desc: 'Dưỡng ẩm chuyên sâu qua đêm, thức dậy da mềm mịn như lụa. Best seller toàn cầu!', w: 4, sz: 46, hr: 26, img: 'assets/hasaki/sleeping_mask.png' },
+  { id: 'retinol', emoji: '🧪', name: 'Retinol The Ordinary', desc: 'Chống lão hoá #1 thế giới! Làm mờ nếp nhăn, tái tạo tế bào, da trẻ trung rạng rỡ.', w: 3, sz: 42, hr: 22, img: 'assets/hasaki/retinol.png' },
+  { id: 'lipstick', emoji: '💄', name: 'Son Black Rouge', desc: 'Lên màu chuẩn chỉnh, giữ màu 12h không trôi. Chất son mịn like velvet, dưỡng môi mềm.', w: 3, sz: 42, hr: 22, img: 'assets/hasaki/lipstick.png' },
+  { id: 'bioderma', emoji: '🪞', name: 'Tẩy Trang Bioderma', desc: 'Tẩy sạch mọi lớp makeup mà không gây kích ứng. Nước khoáng Pháp dịu nhẹ cho da.', w: 3, sz: 42, hr: 22, img: 'assets/hasaki/cleanser.png' },
+  { id: 'innisfree', emoji: '✨', name: 'Kem Dưỡng Innisfree', desc: 'Dưỡng ẩm tự nhiên từ trà xanh đảo Jeju. Chống oxy hoá, bảo vệ da khỏi ô nhiễm.', w: 4, sz: 46, hr: 26, img: 'assets/hasaki/cream.png' },
+  { id: 'skii', emoji: '💎', name: 'Tinh Chất SK-II Pitera', desc: 'Thần dược làm đẹp Nhật Bản! Trẻ hoá da, thu nhỏ lỗ chân lông, nâng tông tự nhiên.', w: 4, sz: 44, hr: 24, img: 'assets/hasaki/essence.png' },
 ];
 
 const LEVELS = [
@@ -474,7 +474,7 @@ class Game {
     const picked = shuffled.slice(0, 3);
 
     // Start spinning animation
-    slots.forEach(s => { s.classList.add('spinning'); s.querySelector('.slot-icon').textContent = '❓'; });
+    slots.forEach(s => { s.classList.add('spinning'); s.querySelector('.slot-icon').innerHTML = '❓'; });
 
     // Reveal one by one
     picked.forEach((item, i) => {
@@ -482,7 +482,7 @@ class Game {
         const slot = slots[i];
         slot.classList.remove('spinning');
         slot.classList.add('revealed');
-        slot.querySelector('.slot-icon').textContent = item.emoji;
+        slot.querySelector('.slot-icon').innerHTML = `<img src="${item.img}" alt="${item.name}" style="width:64px;height:64px;object-fit:contain">`;
         this.sfx.grab();
         if (i === 2) {
           // All revealed
@@ -511,10 +511,10 @@ class Game {
   }
 
   showItemDetail(item) {
-    document.getElementById('modal-icon').textContent = item.emoji;
+    document.getElementById('modal-icon').innerHTML = `<img src="${item.img}" alt="${item.name}" style="width:80px;height:80px;object-fit:contain">`;
     document.getElementById('modal-title').textContent = item.name;
     document.getElementById('modal-desc').textContent = item.desc;
-    document.getElementById('modal-gold').textContent = `💰 ${item.pts} gold trong game`;
+    document.getElementById('modal-gold').textContent = '🎁 Quà tặng bé trong game';
     document.getElementById('item-detail-modal').classList.remove('hidden');
   }
 
@@ -822,7 +822,7 @@ class Game {
     this.collectedHasaki = []; this.bonusTime = 0;
     // Reset spin UI
     const slots = [document.getElementById('slot-1'), document.getElementById('slot-2'), document.getElementById('slot-3')];
-    slots.forEach(s => { s.classList.remove('spinning', 'revealed'); s.querySelector('.slot-icon').textContent = '❓'; });
+    slots.forEach(s => { s.classList.remove('spinning', 'revealed'); s.querySelector('.slot-icon').innerHTML = '❓'; });
     document.getElementById('btn-spin').classList.remove('hidden');
     document.getElementById('btn-spin-done').classList.add('hidden');
     this.show('screen-welcome');
