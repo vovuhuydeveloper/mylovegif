@@ -485,11 +485,18 @@ class Game {
         slot.querySelector('.slot-icon').innerHTML = `<img src="${item.img}" alt="${item.name}" style="width:64px;height:64px;object-fit:contain">`;
         this.sfx.grab();
         if (i === 2) {
-          // All revealed
+          // All revealed — give random bonus time for catching heavy items
           this.collectedHasaki = picked;
+          const spinBonus = 10 + Math.floor(Math.random() * 11); // 10-20s
+          this.bonusTime += spinBonus;
           setTimeout(() => {
             this.sfx.gift();
             btnDone.classList.remove('hidden');
+            // Show bonus time message
+            const msg = document.createElement('div');
+            msg.style.cssText = 'text-align:center;color:#ffc857;font-size:16px;font-weight:700;margin-top:8px;animation:fadeIn 0.5s';
+            msg.textContent = `⏱️ +${spinBonus}s thời gian bonus!`;
+            btnDone.parentNode.insertBefore(msg, btnDone);
           }, 400);
         }
       }, 800 + i * 700);
