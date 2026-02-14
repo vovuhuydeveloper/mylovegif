@@ -19,18 +19,18 @@ const ITEMS = {
 
 // ---- LỜI CHÚC KHI NHẶT THƯ TÌNH ----
 const LOVE_MESSAGES = [
-  '💕 Em là khoản đầu tư sinh lời nhất đời anh!',
-  '📈 Tình yêu mình như cổ phiếu blue-chip — chỉ có tăng giá!',
-  '🌟 Em giỏi BA lắm, nhưng requirement quan trọng nhất là... ở bên anh!',
-  '💎 Em phân tích chứng khoán chuẩn xác, nhưng trái tim anh thì không cần phân tích — nó thuộc về em rồi!',
-  '🚀 Skill của em như đường EMA — luôn vượt kỳ vọng!',
-  '📊 Em là Business Analyst giỏi nhất, và anh là stakeholder trung thành nhất!',
-  '💖 Em cải thiện mỗi ngày, và tình yêu anh dành cho em cũng vậy!',
-  '🌹 Danh mục đầu tư có thể thay đổi, nhưng anh đầu tư vào em là mãi mãi!',
-  '⭐ Em là user story đẹp nhất mà anh từng viết: "As a người yêu, I want ở bên em forever"!',
-  '📈 Chứng khoán có lên có xuống, nhưng tình anh dành cho em chỉ có ALL TIME HIGH!',
-  '💕 Em sprint nào cũng deliver xuất sắc — trong công việc lẫn trong trái tim anh!',
-  '🔥 Em là acceptance criteria duy nhất cho hạnh phúc của anh!',
+  '👸 Công chúa anh năm nay up skill thiệt sịn nà!',
+  '💕 Mãi bên anh Tồ nhoaa bé!',
+  '🔥 Bé iuu mãi đỉnh!',
+  '💖 Tồ yêu bé!',
+  '🌟 Bé giỏi giang quá xá à nha!',
+  '💎 Bé là number 1 của Tồ luôn nè!',
+  '🚀 Năm nay bé lên level thiệt xịn nha!',
+  '😘 Tồ tự hào vì bé lắm luôn á!',
+  '💕 Bé cố lên nha, Tồ luôn ở đây cổ vũ bé!',
+  '👑 Công chúa của anh mãi toả sáng nhoaa!',
+  '🌹 Valentine vui nha bé iuu của Tồ!',
+  '💖 Bé là điều tuyệt vời nhất của anh Tồ!',
 ];
 
 const LEVELS = [
