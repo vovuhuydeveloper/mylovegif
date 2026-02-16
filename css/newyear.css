@@ -98,8 +98,29 @@ body.newyear-body {
     letter-spacing: 2px;
     color: var(--gold);
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     backdrop-filter: blur(4px);
+}
+
+.hero-horse {
+    width: 140px;
+    height: auto;
+    display: block;
+    margin: 0 auto 12px;
+    animation: horseFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 4px 20px rgba(255, 215, 0, 0.3));
+}
+
+@keyframes horseFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(2deg);
+    }
 }
 
 .hero-year {

@@ -166,13 +166,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const luckyMessages = [
         { emoji: '💰', msg: 'Phát Tài Phát Lộc!', sub: 'Năm mới làm gì cũng ra tiền, ví lúc nào cũng căng phồng nha công chúa!' },
-        { emoji: '💕', msg: 'Tình Yêu Viên Mãn!', sub: 'Anh và em mãi bên nhau, yêu nhau mỗi ngày một nhiều hơn! 💝' },
-        { emoji: '🌟', msg: 'Toả Sáng Rực Rỡ!', sub: 'Nhung Công Chúa sẽ toả sáng như ngôi sao, đi đâu cũng được yêu thương!' },
+        { emoji: '💕', msg: 'Tình Yêu Viên Mãn!', sub: 'Tồ và em mãi bên nhau, yêu nhau mỗi ngày một nhiều hơn! 💝' },
+        { emoji: '🌟', msg: 'Toả Sáng Rực Rỡ!', sub: 'Công chúa của Tồ sẽ toả sáng như ngôi sao, đi đâu cũng được yêu thương!' },
         { emoji: '🎊', msg: 'Vạn Sự Như Ý!', sub: 'Mọi điều em mong ước đều sẽ thành hiện thực trong năm mới!' },
         { emoji: '✨', msg: 'Xinh Đẹp Mãi Mãi!', sub: 'Năm mới da đẹp, tóc mượt, nhan sắc ngày càng lên hương!' },
         { emoji: '🧧', msg: 'Lộc Xuân Đầy Nhà!', sub: 'May mắn, hạnh phúc, bình an tràn ngập mỗi ngày bên em!' },
         { emoji: '🎯', msg: 'Thăng Tiến Vượt Bậc!', sub: 'Sự nghiệp năm mới thăng hoa, thành công vang dội, sếp thương đồng nghiệp quý!' },
         { emoji: '💪', msg: 'Khoẻ Re Khoẻ Khoắn!', sub: 'Sức khoẻ dồi dào, năng lượng tràn đầy, ăn gì cũng không béo! 😄' },
+        { emoji: '🐴', msg: 'Phi Nước Đại!', sub: 'Năm Ngựa phi nước đại, mọi việc hanh thông, thuận buồm xuôi gió! 🌟' },
     ];
 
     if (envelope) {
