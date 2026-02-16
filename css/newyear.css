@@ -109,6 +109,9 @@ body.newyear-body {
     margin: 0 auto 12px;
     animation: horseFloat 3s ease-in-out infinite;
     filter: drop-shadow(0 4px 20px rgba(255, 215, 0, 0.3));
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 248, 240, 0.9) 60%, transparent 100%);
+    padding: 8px;
 }
 
 @keyframes horseFloat {
