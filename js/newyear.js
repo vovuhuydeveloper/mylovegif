@@ -178,10 +178,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (envelope) {
         envelope.addEventListener('click', () => {
-            const lucky = luckyMessages[Math.floor(Math.random() * luckyMessages.length)];
-            resultEmoji.textContent = lucky.emoji;
-            resultMsg.textContent = lucky.msg;
-            resultSub.textContent = lucky.sub;
+            resultEmoji.textContent = '🧧';
+            resultMsg.textContent = '7.000.000đ';
+            resultSub.textContent = 'Chờ Tồ 1p TingTing Liền nhoaa 💕';
 
             // Animate
             envelope.style.transition = 'all 0.5s ease';

@@ -515,10 +515,14 @@ body.newyear-body {
     transform: scaleX(1);
 }
 
-.wish-emoji {
-    font-size: 36px;
+.wish-icon {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
     margin-bottom: 10px;
     display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .wish-text {
