@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         envelope.addEventListener('click', () => {
             resultEmoji.textContent = '🧧';
             resultMsg.textContent = '7.000.000đ';
-            resultSub.textContent = 'Chờ Tồ 1p TingTing Liền nhoaa 💕';
+            resultSub.textContent = 'Vui lòng liên hệ ông Tồ , khà khà 😄';
 
             // Animate
             envelope.style.transition = 'all 0.5s ease';
